@@ -1,3 +1,7 @@
+# APIs
+token.pickle
+client_secrets.json
+
 Pipfile
 Pipfile.lock
 

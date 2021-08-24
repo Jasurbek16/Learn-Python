@@ -24,7 +24,7 @@ while True:
     
     pl_request = youtube.playlistItems().list(
         part='contentDetails',
-        playlistId='PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU',
+        playlistId='********',
         maxResults=50,
         pageToken=nextPageToken
         )
@@ -78,8 +78,8 @@ total_seconds = int(total_seconds)
 
 minutes, seconds = divmod(total_seconds, 60)
 hours, minutes = divmod(minutes, 60)
-print(f"{hours}:{minutes}:{seconds}")
 # ^ returns a tuple of the quotient and remainder
+print(f"{hours}:{minutes}:{seconds}")
 
 #  Page Tokens - allow us to get 
 #  all of the results one page at a time 

@@ -1,0 +1,30 @@
+----------------------------------------------------
+Putting a * before an iterable in a function 
+call will unpack it and pass its elements as 
+separate positional arguments to the called function.
+----------------------------------------------------
+
+>>> tuple_vec = (1, 0, 1)
+>>> list_vec = [1, 0, 1]
+>>> print_vector(*tuple_vec)
+<1, 0, 1>
+>>> print_vector(*list_vec)
+<1, 0, 1>
+
+----------------------------------------------------
+Using the * operator on a generator 
+consumes all elements from the generator 
+and passes them to the function:
+----------------------------------------------------
+
+>>> genexpr = (x * x for x in range(3))
+>>> print_vector(*genexpr)
+
+----------------------------------------------------
+** operator for
+unpacking keyword arguments from dictionaries
+----------------------------------------------------
+
+>>> dict_vec = {'y': 0, 'z': 1, 'x': 1}
+>>> print_vector(**dict_vec)
+<1, 0, 1>

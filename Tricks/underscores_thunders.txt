@@ -1,0 +1,17 @@
+# Single underscores are a Python naming convention that indicates a
+# name is meant for internal use.
+
+# In summary, a single trailing underscore (postfix) is used by convention
+# to avoid naming conflicts with Python keywords.
+
+# A double underscore prefix causes the Python interpreter to rewrite
+# the attribute name in order to avoid naming conflicts in subclasses.
+
+# Names that have both leading and trailing double underscores
+# are reserved for special use in the language. This rule covers
+# things like __init__ for object constructors, or __call__ to make objects
+# callable.
+
+# Besides its use as a temporary variable, “_” is a special variable in most
+# Python REPLs that represents the result of the last expression evaluated
+# by the interpreter.

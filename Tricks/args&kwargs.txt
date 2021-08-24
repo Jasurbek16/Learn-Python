@@ -1,0 +1,22 @@
+-------------------------------------------
+args will collect
+extra positional arguments as a tuple
+-------------------------------------------
+kwargs will collect extra keyword 
+arguments as a dictionary
+-------------------------------------------
+
+>>> foo()
+TypeError:
+"foo() missing 1 required positional arg: 'required'"
+>>> foo('hello')
+hello
+>>> foo('hello', 1, 2, 3)
+hello
+(1, 2, 3)
+>>> foo('hello', 1, 2, 3, key1='value', key2=999)
+hello
+(1, 2, 3)
+{'key1': 'value', 'key2': 999}
+
+-------------------------------------------
