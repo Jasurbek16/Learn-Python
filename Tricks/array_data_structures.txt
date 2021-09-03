@@ -1,0 +1,103 @@
+------------------------------------------------------------------------------
+Arrays consist of fixed-size data records that allow each element to be
+efficiently located based on its index.
+
+Because arrays store information in adjoining blocks of memory,
+they’re considered contiguous data structures
+
+Performance-wise, it’s very fast to look up an element contained in
+an array given the element’s index
+------------------------------------------------------------------------------
+(Adding elements creates a copy of the tuple)
+------------------------------------------------------------------------------
+(array.array – Basic Typed Arrays)  --> constrained to a single data type.
+
+>>> import array
+>>> arr = array.array('f', (1.0, 1.5, 2.0, 2.5))
+>>> arr[1]
+1.5
+# Arrays have a nice repr:
+>>> arr
+array('f', [1.0, 1.5, 2.0, 2.5])
+# Arrays are mutable:
+>>> arr[1] = 23.0
+>>> arr
+array('f', [1.0, 23.0, 2.0, 2.5])
+>>> del arr[1]
+>>> arr
+array('f', [1.0, 2.0, 2.5])
+>>> arr.append(42.0)
+>>> arr
+array('f', [1.0, 2.0, 2.5, 42.0])
+# Arrays are "typed":
+>>> arr[1] = 'hello'
+TypeError: "must be real number, not str"
+
+------------------------------------------------------------------------------
+(str – Immutable Arrays of Unicode Characters)
+
+# Strings can be unpacked into a list to
+# get a mutable representation:
+>>> list('abcd')
+['a', 'b', 'c', 'd']
+>>> ''.join(list('abcd'))
+'abcd'
+# Strings are recursive data structures:
+>>> type('abc')
+"<class 'str'>"
+>>> type('abc'[0])
+"<class 'str'>"
+------------------------------------------------------------------------------
+(bytes – Immutable Arrays of Single Bytes)
+
+>>> arr = bytes((0, 1, 2, 3))
+>>> arr[1]
+1
+# Bytes literals have their own syntax:
+>>> arr
+b'x00x01x02x03'
+>>> arr = b'x00x01x02x03'
+# Only valid "bytes" are allowed:
+>>> bytes((0, 300))
+ValueError: "bytes must be in range(0, 256)"
+# Bytes are immutable:
+>>> arr[1] = 23
+TypeError:
+"'bytes' object does not support item assignment"
+>>> del arr[1]
+TypeError:
+"'bytes' object doesn't support item deletion"
+------------------------------------------------------------------------------
+(bytearray – Mutable Arrays of Single Bytes)
+
+>>> arr = bytearray((0, 1, 2, 3))
+>>> arr[1]
+1
+# The bytearray repr:
+>>> arr
+bytearray(b'x00x01x02x03')
+# Bytearrays are mutable:
+>>> arr[1] = 23
+>>> arr
+bytearray(b'x00x17x02x03')
+>>> arr[1]
+23
+# Bytearrays can grow and shrink in size:
+>>> del arr[1]
+>>> arr
+bytearray(b'x00x02x03')
+>>> arr.append(42)
+>>> arr
+bytearray(b'x00x02x03*')
+# Bytearrays can only hold "bytes"
+# (integers in the range 0 <= x <= 255)
+>>> arr[1] = 'hello'
+TypeError: "an integer is required"
+>>> arr[1] = 300
+ValueError: "byte must be in range(0, 256)"
+# Bytearrays can be converted back into bytes objects:
+# (This will copy the data)
+>>> bytes(arr)
+b'x00x02x03*'
+------------------------------------------------------------------------------
+

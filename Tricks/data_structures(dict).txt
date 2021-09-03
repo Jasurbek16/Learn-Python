@@ -1,0 +1,93 @@
+Python’s dictionaries are indexed by keys that can be of any hashable
+type2: A hashable object has a hash value which never changes during
+its lifetime (see __hash__), and it can be compared to other objects
+(see __eq__). In addition, hashable objects which compare as equal
+must have the same hash value.
+
+------------------------------------------------------------------------------
+(collections.OrderedDict – Remember the
+Insertion Order of Keys)
+
+>>> import collections
+>>> d = collections.OrderedDict(one=1, two=2, three=3)
+>>> d
+OrderedDict([('one', 1), ('two', 2), ('three', 3)])
+>>> d['four'] = 4
+>>> d
+OrderedDict([('one', 1), ('two', 2),
+('three', 3), ('four', 4)])
+>>> d.keys()
+odict_keys(['one', 'two', 'three', 'four'])
+
+-----------------------------------------------------------------------------
+(collections.defaultdict – Return Default Values
+for Missing Keys)
+
+# The "defaultdict" class is another dictionary subclass that accepts
+a callable in its constructor whose return value will be used if a
+requested key cannot be found
+
+
+>>> from collections import defaultdict
+>>> dd = defaultdict(list)
+
+# Accessing a missing key creates it and
+# initializes it using the default factory,
+# i.e. list() in this example:
+
+>>> dd['dogs'].append('Rufus')
+>>> dd['dogs'].append('Kathrin')
+>>> dd['dogs'].append('Mr Sniffles')
+>>> dd['dogs']
+['Rufus', 'Kathrin', 'Mr Sniffles']
+-----------------------------------------------------------------------------
+(collections.ChainMap – Search Multiple
+Dictionaries as a Single Mapping)
+
+# Lookups search the underlying mappings
+one by one until a key is found. Insertions, updates, and deletions
+only affect the first mapping added to the chain.
+
+
+>>> from collections import ChainMap
+>>> dict1 = {'one': 1, 'two': 2}
+>>> dict2 = {'three': 3, 'four': 4}
+>>> chain = ChainMap(dict1, dict2)
+>>> chain
+ChainMap({'one': 1, 'two': 2}, {'three': 3, 'four': 4})
+# ChainMap searches each collection in the chain
+# from left to right until it finds the key (or fails):
+>>> chain['three']
+3
+>>> chain['one']
+1
+>>> chain['missing']
+KeyError: 'missing'
+-----------------------------------------------------------------------------
+(types.MappingProxyType – A Wrapper for Making
+Read-Only Dictionaries)
+
+# MappingProxyType is a wrapper around a standard dictionary that
+provides a read-only view into the wrapped dictionary’s data.
+
+# For example, this can be helpful if you’d like to return a dictionary carrying
+internal state from a class or module, while discouraging write
+access to this object. Using MappingProxyType allows you to put these
+restrictions in place without first having to create a full copy of the dictionary.
+
+
+>>> from types import MappingProxyType
+>>> writable = {'one': 1, 'two': 2}
+>>> read_only = MappingProxyType(writable)
+# The proxy is read-only:
+>>> read_only['one']
+1
+>>> read_only['one'] = 23
+TypeError:
+"'mappingproxy' object does not support item assignment"
+# Updates to the original are reflected in the proxy:
+>>> writable['one'] = 42
+>>> read_only
+mappingproxy({'one': 42, 'two': 2})
+
+-----------------------------------------------------------------------------
