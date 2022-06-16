@@ -1,6 +1,2 @@
-# Learning Python Packages
-<ul>
-    <li>Matplotlib
-    <li>Pandas
-    <li>APIs
-</ul>
+# Learning-Python
+This repository contains all of the codes while learning Python.
